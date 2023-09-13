@@ -96,11 +96,11 @@ namespace TimeKeeper.ViewModels
             UpdateCommand = new RelayCommand(Update, Can);
             ViewTaskModalCommand = new RelayCommand(ViewTaskModal, Can);
             UpdateTaskList();
-            _aggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTable);
+            _aggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddUpdateTable);
          
         }
 
-        private void UpdateTable(TaskModel model)
+        private void AddUpdateTable(TaskModel model)
         {
             TaskList.Add(model);
         }
@@ -143,8 +143,9 @@ namespace TimeKeeper.ViewModels
                     if (result == MessageBoxResult.Yes)
                     {
                         dbContext.TaskTable.Remove(SelectedTask);
-                        dbContext.SaveChanges(true);
-                        UpdateTaskList();
+                        dbContext.SaveChanges();
+                        TaskList.Remove(SelectedTask);
+                        SelectedTask = null;
                     }
                 }
                 else
