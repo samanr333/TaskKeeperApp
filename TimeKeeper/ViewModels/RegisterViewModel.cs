@@ -22,6 +22,16 @@ namespace TimeKeeper.ViewModels
         public ObservableCollection<UserModel> UserList { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand SignupCommand { get; set; }
+        private string _confirmPassword;
+        public string ConfirmPassword
+        {
+            get { return _confirmPassword; }
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged(nameof(ConfirmPassword));
+            }
+        }
         public RegisterViewModel()
         {
             User = new UserModel();
@@ -47,6 +57,10 @@ namespace TimeKeeper.ViewModels
         {
             return UserList.FirstOrDefault<UserModel>(user => user.Username.Equals(Username));
         }
+        public UserModel FindUserByEmail(string Email)
+        {
+            return UserList.FirstOrDefault<UserModel>(user => user.Email.Equals(Email));
+        }
         public bool CanSignup(object parameter)
         {
             return true;
@@ -62,11 +76,20 @@ namespace TimeKeeper.ViewModels
             {
                 UserModel users = new UserModel { Name = User.Name, Username = User.Username.ToLower(), Email = User.Email, Password = User.Password };
                 users.Password = BC.EnhancedHashPassword(User.Password);
-                var existingUser = FindUserByUsername(User.Username);
-
-                if (existingUser != null && existingUser.Username.Equals(User.Username))
+                var existingUsername = FindUserByUsername(User.Username);
+                var existingEmail = FindUserByEmail(User.Email);
+                
+                if (existingUsername != null && existingUsername.Username.Equals(User.Username))
                 {
                     MessageBox.Show("Username already exists");
+                }
+                else if (existingEmail != null && existingEmail.Email.Equals(User.Email))
+                {
+                    MessageBox.Show("Email already exists");
+                }
+                else if (User.Password != ConfirmPassword)
+                {
+                    MessageBox.Show("Password did not match");
                 }
                 else
                 {

@@ -72,8 +72,6 @@ C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeep
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\TimeKeeper.genruntimeconfig.cache
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\ref\TimeKeeper.dll
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\TaskModal.g.cs
-C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\TaskModal.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Dashboard.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Dashboard.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
@@ -84,3 +82,5 @@ C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeep
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\AddTaskModal.baml
+C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\AddTaskModal.g.cs

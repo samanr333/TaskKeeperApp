@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddTaskModal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Dashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,11 +22,11 @@
     <Compile Update="Views\Task.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\TaskModal.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\AddTaskModal.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Dashboard.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -37,9 +40,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Task.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\TaskModal.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

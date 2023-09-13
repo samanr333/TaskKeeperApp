@@ -7,12 +7,14 @@ using System.Windows.Input;
 using TimeKeeper.Command;
 using TimeKeeper.DataContext;
 using TimeKeeper.Models;
+using TimeKeeper.Services;
 using TimeKeeper.Views;
 
 namespace TimeKeeper.ViewModels
 {
     public class MainWindowViewModel : BindableBase, INotifyPropertyChanged
     {
+        private DataServices _services;
         private string _title = "Prism Application";
         public string Title
         {
@@ -32,12 +34,14 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(User));
             }
         }
-        
+
         public ICommand LogoutCommand { get; set; }
-        public MainWindowViewModel()
+        public MainWindowViewModel(DataServices services)
         {
+            _services = services;
             dbContext = new AppDbContext();
             User = new UserModel();
+            User = _services.GetSharedData();
             LogoutCommand = new RelayCommand(Logout, CanLogout);
         }
         public void Logout(object parameter)

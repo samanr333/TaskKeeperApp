@@ -26,6 +26,36 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(TotalTask));
             }
         }
+        private int _pendingTask;
+        public int PendingTask
+        {
+            get { return _pendingTask; }
+            set
+            {
+                _pendingTask = value;
+                OnPropertyChanged(nameof(PendingTask));
+            }
+        }
+        private int _inprogressTask;
+        public int InprogressTask
+        {
+            get { return _inprogressTask; }
+            set
+            {
+                _inprogressTask = value;
+                OnPropertyChanged(nameof(InprogressTask));
+            }
+        }
+        private int _doneTask;
+        public int DoneTask
+        {
+            get { return _doneTask; }
+            set
+            {
+                _doneTask = value;
+                OnPropertyChanged(nameof(DoneTask));
+            }
+        }
         private UserModel user;
         public UserModel User
         {
@@ -42,13 +72,31 @@ namespace TimeKeeper.ViewModels
             dbContext = new AppDbContext();
             User = new UserModel();
             _services = services;
-            /*TaskCount();*/
+            User = _services.GetSharedData();
+            TaskCount();
+            PendingTaskCount();
+            InprogressTaskCount();
+            DoneTaskCount();
         }
         public void TaskCount()
         {
-            User = _services.GetSharedData();
-            var totaltask = dbContext.UserTable.Count(task => task.UserId == User.UserId);
+            var totaltask = dbContext.TaskTable.Count(task => task.UserId == User.UserId); ;
             TotalTask = totaltask;
+        }
+        public void PendingTaskCount()
+        {
+            var totalpendingtask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Pending"); 
+            PendingTask = totalpendingtask;
+        }
+        public void InprogressTaskCount()
+        {
+            var totalinprogresstask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "In Progress");
+            InprogressTask = totalinprogresstask;
+        }
+        public void DoneTaskCount()
+        {
+            var totalDonetask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Done");
+            DoneTask = totalDonetask;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

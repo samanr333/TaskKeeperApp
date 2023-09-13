@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using System.Windows;
 using TimeKeeper.DataContext;
+using TimeKeeper.Services;
 using TimeKeeper.Views;
 
 namespace TimeKeeper
@@ -21,7 +22,8 @@ namespace TimeKeeper
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterSingleton<DataServices>();
+/*            containerRegistry.Register<IWindowService, WindowService>();*/
         }
     }
 }

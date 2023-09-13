@@ -68,7 +68,7 @@
                         FontFamily="Montserrat"
                         FontSize="50"
                         FontWeight="Bold"
-                        Text="dj" />
+                        Text="{Binding PendingTask}" />
                 </Border>
             </StackPanel>
         </Border>
@@ -96,7 +96,7 @@
                         FontFamily="Montserrat"
                         FontSize="50"
                         FontWeight="Bold"
-                        Text="{Binding User.Username}" />
+                        Text="{Binding InprogressTask}" />
                 </Border>
             </StackPanel>
         </Border>
@@ -124,7 +124,7 @@
                         FontFamily="Montserrat"
                         FontSize="50"
                         FontWeight="Bold"
-                        Text="dj" />
+                        Text="{Binding DoneTask}" />
                 </Border>
             </StackPanel>
         </Border>

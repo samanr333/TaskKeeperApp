@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\App.xaml
-61159562705
+61027245724
 
-17-1375539433
+19-1465570934
 23339723018
-Views\Dashboard.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\Register.xaml;Views\Task.xaml;Views\TaskModal.xaml;
+Views\AddTaskModal.xaml;Views\Dashboard.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\Register.xaml;Views\Task.xaml;
 
 False
 

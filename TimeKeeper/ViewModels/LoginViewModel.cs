@@ -68,10 +68,11 @@ namespace TimeKeeper.ViewModels
             var existingUser = FindUserByUsername(User.Username);
             if (existingUser != null && BC.EnhancedVerify(User.Password, existingUser.Password))
             {
+                _services.SetSharedData(existingUser);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-                Application.Current.MainWindow.Close();
-                _services.SetSharedData(existingUser);
+                Application.Current.Windows.OfType<Login>().FirstOrDefault()?.Close();
+
             }
             else
             {

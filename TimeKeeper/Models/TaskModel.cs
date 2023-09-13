@@ -61,7 +61,7 @@ namespace TimeKeeper.Models
             {
                 if (_taskCreateDate != value)
                 {
-                    _taskCreateDate = DateTime.Now;
+                    _taskCreateDate = value;
                     OnPropertyChanged(nameof(TaskCreateDate));
                 }
             }

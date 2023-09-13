@@ -9,11 +9,16 @@ using TimeKeeper.Models;
 using TimeKeeper.DataContext;
 using TimeKeeper.Command;
 using TimeKeeper.Views;
+using System;
+using TimeKeeper.Services;
+using Prism.Events;
+using Prism.Commands;
 
 namespace TimeKeeper.ViewModels
 {
     public class TaskViewModel : BindableBase, INotifyPropertyChanged
     {
+        private DataServices _services;
         public AppDbContext dbContext;
         private TaskModel _task;
         public TaskModel Task
@@ -35,118 +40,147 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(User));
             }
         }
-        public ICommand AddCommand { get; set; }
-        public ICommand RemoveCommand { get; set; }
+
+        public DelegateCommand RemoveCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand ViewTaskModalCommand { get; set; }
+        private string _searchTask;
+        public string SearchTask
+        {
+            get { return _searchTask; }
+            set
+            {
+                _searchTask = value;
+                OnPropertyChanged(nameof(SearchTask));
+                GetTask();
+            }
+        }
+
         private TaskModel _selectedTask;
         public TaskModel SelectedTask
         {
             get => _selectedTask;
             set
             {
-                if (_selectedTask != value)
-                {
-                    _selectedTask = value;
-                    OnPropertyChanged(nameof(SelectedTask));
-                }
+                SetProperty(ref _selectedTask, value);
             }
         }
-        public ObservableCollection<TaskModel> TaskList { get; set; }
+        private ObservableCollection<TaskModel> _taskList;
+        public ObservableCollection<TaskModel> TaskList {
+            get
+            {
+                return _taskList;
+            }
+            set
+            {
+                if (_taskList != value)
+                {
+                    _taskList = value;
+                    RaisePropertyChanged(nameof(TaskList));
+                }
+                
+                //SetProperty(ref _taskList, value);
+            } 
+        }
+        private IEventAggregator _aggregator;
 
-        public TaskViewModel()
+        public TaskViewModel(DataServices services, IEventAggregator eventAggregator)
         {
+            _aggregator = eventAggregator;
+            _services = services;
             User = new UserModel();
+            User = _services.GetSharedData();
             Task = new TaskModel();
             dbContext = new AppDbContext();
-            AddCommand = new RelayCommand(Add, Can);
-            RemoveCommand = new RelayCommand(Remove, Can);
+            RemoveCommand = new DelegateCommand(Remove);
             UpdateCommand = new RelayCommand(Update, Can);
             ViewTaskModalCommand = new RelayCommand(ViewTaskModal, Can);
-            TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable);
+            UpdateTaskList();
+            _aggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTable);
+         
         }
-        private void LoadTask()
+
+        private void UpdateTable(TaskModel model)
         {
-            TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable);
+            TaskList.Add(model);
         }
+        public void UpdateTaskList()
+        {
+            GetTask();
+        }
+        private void GetTask()
+        {
+            if (String.IsNullOrWhiteSpace(SearchTask))
+            {
+                TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable.Where(t => t.UserId == User.UserId));
+            }
+            else
+            {
+                string text = SearchTask.Trim().ToLower();
+                TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable.
+                                 Where(t => t.UserId == User.UserId && t.TaskName.ToLower().Contains(text)));
+            }
+        }
+        
         public void ViewTaskModal(object parameter)
         {
-            TaskModal taskModal = new TaskModal();
-            taskModal.Show();
+            AddTaskModal addTaskModal = new AddTaskModal();
+            addTaskModal.Show();
         }
-        // Add Task
-        public void Add(object parameter)
-        {
-            if (!string.IsNullOrWhiteSpace(Task.TaskName) && !string.IsNullOrWhiteSpace(Task.Description) && !string.IsNullOrEmpty(Task.Status))
+            public bool Can(object parameter)
             {
-                TaskModel tasks = new TaskModel { UserId = 1, TaskName = Task.TaskName, Description = Task.Description, Status = Task.Status };
-                dbContext.TaskTable.Add(tasks);
-                dbContext.SaveChanges();
-                TaskList.Add(tasks);
-                LoadTask();
-                MessageBox.Show("Task added successfully");
-                /*Application.Current.Windows.OfType<AddTaskModal>().FirstOrDefault()?.Close();*/
+                return true;
             }
-            else
-            {
-                MessageBox.Show("Please enter all fields");
-            }
-        }
-        public bool Can(object parameter)
-        {
-            return true;
-        }
 
-        // Delete task
-        public void Remove(object parameter)
-        {
-            if (SelectedTask != null)
+            // Delete task
+            public void Remove()
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to remove the task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.Yes)
+            MessageBox.Show("sdjskd");
+                if (SelectedTask != null)
                 {
-                    dbContext.TaskTable.Remove(SelectedTask);
-                    dbContext.SaveChanges(true);
-                    TaskList.Remove(SelectedTask);
-                    TaskList.Remove(SelectedTask);
-                    SelectedTask = null;
-                    LoadTask();
-                    Reset();
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to remove the task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        dbContext.TaskTable.Remove(SelectedTask);
+                        dbContext.SaveChanges(true);
+                        UpdateTaskList();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Task to remove");
                 }
             }
-            else
+            public void Reset()
             {
-                MessageBox.Show("Please select a Task to remove");
-            }
-        }
-        public void Reset()
-        {
 
-        }
-        private TaskModel FindTaskByID(int TaskId)
-        {
-            return TaskList.FirstOrDefault(task => task.TaskId == TaskId);
-        }
-        public void Update(object parameter)
-        {
-            if (SelectedTask != null)
-            {
-                TaskModel task = FindTaskByID(SelectedTask.TaskId);
-                task.TaskName = Task.TaskName;
-                task.Description = Task.Description;
-                task.Status = Task.Status;
-                dbContext.TaskTable.Update(task);
-                dbContext.SaveChanges();
-                Reset();
-                MessageBox.Show("Task Updated Successfully");
-                LoadTask();
             }
-            else
+            private TaskModel FindTaskByID(int TaskId)
             {
-                MessageBox.Show("Fuck you");
+                return TaskList.FirstOrDefault(task => task.TaskId == TaskId);
             }
-        }
+            public void Update(object parameter)
+            {
+                if (SelectedTask != null)
+                {
+                    TaskModel task = FindTaskByID(SelectedTask.TaskId);
+                    task.TaskName = Task.TaskName;
+                    task.Description = Task.Description;
+                    task.Status = Task.Status;
+                    dbContext.TaskTable.Update(task);
+                    dbContext.SaveChanges();
+                    dbContext.Entry(task).Reload();
+                    Reset();
+                    MessageBox.Show("Task Updated Successfully");
+                    //LoadTask();
+                }
+                else
+                {
+                    MessageBox.Show("Fuck you");
+                }
+            }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -2,6 +2,7 @@
     x:Class="TimeKeeper.Views.Register"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:passwords="clr-namespace:TimeKeeper.Services"
     xmlns:prism="http://prismlibrary.com/"
     Width="550"
     Height="550"
@@ -91,17 +92,16 @@
                 </TextBox.Background>
             </TextBox>
             <TextBlock Style="{StaticResource TextBlockStyle}" Text="Password" />
-            <TextBox
-                x:Name="RegPasswordBox"
+            <PasswordBox
+                passwords:PasswordBoxAssistant.BoundPassword="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Background="Transparent"
-                Style="{StaticResource TextBoxStyle}"
-                Text="{Binding User.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-            <!--<TextBlock Style="{StaticResource TextBlockStyle}" Text="Confirm Password" />
-            <PasswordBox x:Name="RegConfitmPasswordBox" Style="{StaticResource PasswordBoxStyle}">
-                <PasswordBox.Background>
-                    <ImageBrush AlignmentX="Left" Stretch="None" />
-                </PasswordBox.Background>
-            </PasswordBox>-->
+                Style="{StaticResource PasswordBoxStyle}" />
+
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Confirm Password" />
+            <PasswordBox
+                passwords:PasswordBoxAssistant.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Background="Transparent"
+                Style="{StaticResource PasswordBoxStyle}" />
             <Button
                 Margin="0,50,0,0"
                 BorderThickness="0"
