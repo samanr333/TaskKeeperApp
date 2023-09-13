@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="TimeKeeper.Views.Dashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" xmlns:fa="http://schemas.fontawesome.io/icons/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <Style x:Key="BoxStyle" TargetType="Border">
+            <Setter Property="Width" Value="260" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Height" Value="260" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Background" Value="AliceBlue" />
+            <Setter Property="BorderBrush" Value="#BE263B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="50,0,0,0" />
+        </Style>
+    </UserControl.Resources>
+    <WrapPanel>
+        <Border Style="{StaticResource BoxStyle}">
+            <StackPanel>
+                <fa:FontAwesome
+                    Margin="5"
+                    FontSize="100"
+                    Foreground="DarkRed"
+                    Icon="Tasks" />
+                <Label
+                    HorizontalAlignment="Center"
+                    Content="Total Task"
+                    FontFamily="Montserrat"
+                    FontSize="50"
+                    FontWeight="Bold" />
+                <Border
+                    Width="65"
+                    Height="65"
+                    Background="#84858D"
+                    CornerRadius="5">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="50"
+                        FontWeight="Bold"
+                        Text="{Binding TotalTask}" />
+                </Border>
+            </StackPanel>
+        </Border>
+        <Border Style="{StaticResource BoxStyle}">
+            <StackPanel>
+                <fa:FontAwesome
+                    Margin="5"
+                    FontSize="100"
+                    Foreground="DarkRed"
+                    Icon="StarOutline" />
+                <Label
+                    HorizontalAlignment="Center"
+                    Content="Pending"
+                    FontFamily="Montserrat"
+                    FontSize="50"
+                    FontWeight="Bold" />
+                <Border
+                    Width="65"
+                    Height="65"
+                    Background="#84858D"
+                    CornerRadius="5">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="50"
+                        FontWeight="Bold"
+                        Text="dj" />
+                </Border>
+            </StackPanel>
+        </Border>
+        <Border Style="{StaticResource BoxStyle}">
+            <StackPanel>
+                <fa:FontAwesome
+                    Margin="5"
+                    FontSize="100"
+                    Foreground="DarkRed"
+                    Icon="StarHalfFull" />
+                <Label
+                    HorizontalAlignment="Center"
+                    Content="In Process"
+                    FontFamily="Montserrat"
+                    FontSize="50"
+                    FontWeight="Bold" />
+                <Border
+                    Width="65"
+                    Height="65"
+                    Background="#84858D"
+                    CornerRadius="5">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="50"
+                        FontWeight="Bold"
+                        Text="{Binding User.Username}" />
+                </Border>
+            </StackPanel>
+        </Border>
+        <Border Style="{StaticResource BoxStyle}">
+            <StackPanel>
+                <fa:FontAwesome
+                    Margin="5"
+                    FontSize="100"
+                    Foreground="DarkRed"
+                    Icon="Star" />
+                <Label
+                    HorizontalAlignment="Center"
+                    Content="Done"
+                    FontFamily="Montserrat"
+                    FontSize="50"
+                    FontWeight="Bold" />
+                <Border
+                    Width="65"
+                    Height="65"
+                    Background="#84858D"
+                    CornerRadius="5">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="50"
+                        FontWeight="Bold"
+                        Text="dj" />
+                </Border>
+            </StackPanel>
+        </Border>
+    </WrapPanel>
+</UserControl>

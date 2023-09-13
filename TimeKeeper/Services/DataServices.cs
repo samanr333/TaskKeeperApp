@@ -1,0 +1,17 @@
+﻿using TimeKeeper.Models;
+
+namespace TimeKeeper.Services
+{
+    public class DataServices
+    {
+        private UserModel _sharedData;
+        public UserModel GetSharedData()
+        {
+            return _sharedData;
+        }
+        public void SetSharedData(UserModel data)
+        {
+            _sharedData = data;
+        }
+    }
+}
