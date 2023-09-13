@@ -10,6 +10,7 @@ namespace TimeKeeper.Models
         private int _taskId;
         private string _taskName;
         private DateTime _taskCreateDate;
+        private DateTime _taskUpdatedDate;
         private string _description;
         private string _status;
         private int _userId; // Foreign key to relate tasks to users
@@ -63,6 +64,18 @@ namespace TimeKeeper.Models
                 {
                     _taskCreateDate = value;
                     OnPropertyChanged(nameof(TaskCreateDate));
+                }
+            }
+        }
+        public DateTime TaskUpdatedDate
+        {
+            get => _taskUpdatedDate;
+            set
+            {
+                if (_taskUpdatedDate != value)
+                {
+                    _taskUpdatedDate = value;
+                    OnPropertyChanged(nameof(TaskUpdatedDate));
                 }
             }
         }

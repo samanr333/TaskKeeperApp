@@ -16,10 +16,16 @@
     <Compile Update="Views\Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PrismWindow1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Register.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Task.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UpdateTaskModal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -36,10 +42,16 @@
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\PrismWindow1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Register.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Task.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UpdateTaskModal.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

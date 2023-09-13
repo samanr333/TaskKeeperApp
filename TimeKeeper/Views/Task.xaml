@@ -11,7 +11,7 @@
 
             <Button
                 BorderThickness="0"
-                Command="{Binding ViewTaskModalCommand}"
+                Command="{Binding ViewAddTaskModalCommand}"
                 Content="Add Task"
                 Cursor="Hand"
                 FontFamily="Montserrat"
@@ -70,7 +70,38 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <TextBox
+            <Button
+                Margin="30,0,0,0"
+                BorderThickness="0"
+                Command="{Binding ViewUpdateTaskModalCommand}"
+                Content="Update"
+                Cursor="Hand"
+                FontFamily="Montserrat"
+                FontSize="12"
+                Foreground="White">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="DarkRed" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Crimson" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Width="70"
+                            Height="25"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--<TextBox
                 Width="150"
                 Height="25"
                 Margin="30,0,0,0"
@@ -81,7 +112,7 @@
                 Margin="5"
                 FontSize="20"
                 Foreground="DarkRed"
-                Icon="Search" />
+                Icon="Search" />-->
 
         </WrapPanel>
 
@@ -115,6 +146,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition />
                                     <RowDefinition />
                                     <RowDefinition />
                                     <RowDefinition Height="*" />
@@ -174,9 +206,27 @@
                                         Foreground="DarkGreen"
                                         Text="{Binding TaskCreateDate}" />
                                 </WrapPanel>
+                                <!--  Updated Date  -->
+                                <WrapPanel Grid.Row="3">
+                                    <Label
+                                        Content="Updated On: "
+                                        FontFamily="Montserrat"
+                                        FontSize="10"
+                                        FontStyle="Italic"
+                                        FontWeight="Medium"
+                                        Foreground="DarkGreen" />
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontFamily="Montserrat"
+                                        FontSize="10"
+                                        FontStyle="Italic"
+                                        FontWeight="Medium"
+                                        Foreground="DarkGreen"
+                                        Text="{Binding TaskUpdatedDate}" />
+                                </WrapPanel>
                                 <!--  Description  -->
                                 <TextBlock
-                                    Grid.Row="3"
+                                    Grid.Row="4"
                                     Margin="5"
                                     FontFamily="Montserrat"
                                     FontSize="12"

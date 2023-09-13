@@ -42,7 +42,6 @@ namespace TimeKeeper.ViewModels
         {
             get; set;
         }
-        /*public ICommand AddCommand { get; set; }*/
         private IEventAggregator _eventAggregator;
         public DelegateCommand AddCommand { get; set; }
         public AddTaskModalViewModel(DataServices services, IEventAggregator eventAggregator)
@@ -54,14 +53,13 @@ namespace TimeKeeper.ViewModels
             User = _services.GetSharedData();
             dbContext = new AppDbContext();
             TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable);
-            /*AddCommand = new RelayCommand(Add, CanAdd);*/
             AddCommand = new DelegateCommand(Add);
         }
         public void Add()
         {
-            if (!string.IsNullOrWhiteSpace(Task.TaskName) && !string.IsNullOrWhiteSpace(Task.Description) && !string.IsNullOrEmpty(Task.Status))
+            if (!string.IsNullOrWhiteSpace(Task.TaskName) && !string.IsNullOrWhiteSpace(Task.Description))
             {
-                TaskModel tasks = new TaskModel { UserId = User.UserId, TaskName = Task.TaskName, Description = Task.Description, Status = Task.Status, TaskCreateDate = DateTime.Now };
+                TaskModel tasks = new TaskModel { UserId = User.UserId, TaskName = Task.TaskName, Description = Task.Description, Status = "Pending", TaskCreateDate = DateTime.Now, TaskUpdatedDate = DateTime.Now };
                 dbContext.TaskTable.Add(tasks);
                 dbContext.SaveChanges();
                 _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(tasks);

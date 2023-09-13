@@ -7,7 +7,7 @@ namespace TimeKeeper.DataContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=UserDB2;Trusted_Connection=True;";
+            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=UserDB3;Trusted_Connection=True;";
             optionsBuilder.UseSqlServer(connectionString);
             optionsBuilder.EnableSensitiveDataLogging();
         }
