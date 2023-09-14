@@ -67,6 +67,10 @@
             "Prism.DryIoc": {
               "target": "Package",
               "version": "[8.1.97, )"
+            },
+            "Syncfusion.SfChart.WPF": {
+              "target": "Package",
+              "version": "[22.2.12, )"
             }
           },
           "imports": [

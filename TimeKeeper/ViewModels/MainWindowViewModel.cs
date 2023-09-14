@@ -1,9 +1,14 @@
 ﻿using Prism.Mvvm;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Timers;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TimeKeeper.Command;
 using TimeKeeper.DataContext;
 using TimeKeeper.Models;
@@ -36,6 +41,30 @@ namespace TimeKeeper.ViewModels
         }
 
         public ICommand LogoutCommand { get; set; }
+
+
+        private DateTime loginTime;
+        private double loggedInHours;
+        private DispatcherTimer timer;
+        public DateTime LoginTime
+        {
+            get { return loginTime; }
+            set
+            {
+                loginTime = value;
+                OnPropertyChanged("LoginTime");
+            }
+        }
+
+        public double LoggedInHours
+        {
+            get { return loggedInHours; }
+            set
+            {
+                loggedInHours = value;
+                OnPropertyChanged("LoggedInHours");
+            }
+        }
         public MainWindowViewModel(DataServices services)
         {
             _services = services;
@@ -43,6 +72,27 @@ namespace TimeKeeper.ViewModels
             User = new UserModel();
             User = _services.GetSharedData();
             LogoutCommand = new RelayCommand(Logout, CanLogout);
+
+            loginTime = DateTime.Now;
+            loggedInHours = 0;
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Update every second
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            CalculateLoggedInHours();
+        }
+
+        private void CalculateLoggedInHours()
+        {
+            // Calculate the elapsed time since login
+            var elapsedTime = DateTime.Now - LoginTime;
+
+            // Update the LoggedInHours property with the calculated hours
+            LoggedInHours = elapsedTime.TotalHours;
         }
         public void Logout(object parameter)
         {

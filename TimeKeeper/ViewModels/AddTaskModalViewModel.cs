@@ -63,7 +63,6 @@ namespace TimeKeeper.ViewModels
                 dbContext.TaskTable.Add(tasks);
                 dbContext.SaveChanges();
                 _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(tasks);
-              
                 MessageBox.Show("Task added successfully");
                 Application.Current.Windows.OfType<AddTaskModal>().FirstOrDefault()?.Close();
             }

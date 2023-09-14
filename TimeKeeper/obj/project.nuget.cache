@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7CJ31WAvklU1KRLvtX7AEamt9u78JXTFth2HWTIB/9NEZxSrf5RqI5ygf+qqtexEbewv/I9OKZxIdMqhiXzwrg==",
+  "dgSpecHash": "fvtwfgaWTifZR+ILqofAGR9hJnSZsZjGXk6c8hzJ42SutzQ5owRR5EgQU0MOu2BtKjc1nmnT3EB+2JwEXTD1vQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TimeKeeper.csproj",
+  "projectFilePath": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TaskKeeper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\saman\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
@@ -49,6 +49,8 @@
     "C:\\Users\\saman\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\saman\\.nuget\\packages\\syncfusion.licensing\\22.2.12\\syncfusion.licensing.22.2.12.nupkg.sha512",
+    "C:\\Users\\saman\\.nuget\\packages\\syncfusion.sfchart.wpf\\22.2.12\\syncfusion.sfchart.wpf.22.2.12.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\system.codedom\\4.7.0\\system.codedom.4.7.0.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\saman\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",

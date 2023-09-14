@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,6 +17,7 @@ namespace TimeKeeper.ViewModels
 {
     public class DashboardViewModel : BindableBase, INotifyPropertyChanged
     {
+        private IEventAggregator _eventAggregator;
         private readonly AppDbContext dbContext;
         private int _totalTask;
         public int TotalTask
@@ -66,37 +69,36 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(User));
             }
         }
+        public ObservableCollection<int> Counts = new ObservableCollection<int>();
         private DataServices _services;
-        public DashboardViewModel(DataServices services)
+        public DashboardViewModel(DataServices services, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             dbContext = new AppDbContext();
             User = new UserModel();
             _services = services;
+            _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddTaskCount);
+            _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTaskCount);
             User = _services.GetSharedData();
-            TaskCount();
-            PendingTaskCount();
-            InprogressTaskCount();
-            DoneTaskCount();
+            TaskCounts();
         }
-        public void TaskCount()
+
+        private void AddTaskCount(TaskModel model)
         {
-            var totaltask = dbContext.TaskTable.Count(task => task.UserId == User.UserId); ;
-            TotalTask = totaltask;
+            TaskCounts();
         }
-        public void PendingTaskCount()
+        private void UpdateTaskCount(TaskModel model)
         {
-            var totalpendingtask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Pending"); 
-            PendingTask = totalpendingtask;
+            TaskCounts();
         }
-        public void InprogressTaskCount()
+
+        public void TaskCounts()
         {
-            var totalinprogresstask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "In Progress");
-            InprogressTask = totalinprogresstask;
-        }
-        public void DoneTaskCount()
-        {
-            var totalDonetask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Done");
-            DoneTask = totalDonetask;
+            TotalTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId); ;
+            PendingTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Pending");
+            InprogressTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "In Progress");
+            DoneTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Done");
+            Counts = new ObservableCollection<int>() { PendingTask, InprogressTask, DoneTask };
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

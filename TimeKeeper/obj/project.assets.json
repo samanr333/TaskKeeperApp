@@ -765,6 +765,31 @@
           }
         }
       },
+      "Syncfusion.Licensing/22.2.12": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.SfChart.WPF/22.2.12": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Licensing": "22.2.12"
+        },
+        "compile": {
+          "lib/net6.0-windows7.0/Syncfusion.SfChart.WPF.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/Syncfusion.SfChart.WPF.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.CodeDom/4.7.0": {
         "type": "package",
         "compile": {
@@ -2498,6 +2523,73 @@
         "version.txt"
       ]
     },
+    "Syncfusion.Licensing/22.2.12": {
+      "sha512": "rbiiSZoSVQ2WZT8skcB/pZ3BZD8z4VSFlvrOnkAFLUIVg2eITK9BaQJOYS+W5GpMx7rj3xFKcZ4JjJPUCuzkYw==",
+      "type": "package",
+      "path": "syncfusion.licensing/22.2.12",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/MonoAndroid90/Syncfusion.Licensing.dll",
+        "lib/Xamarin.Mac/Syncfusion.Licensing.dll",
+        "lib/Xamarin.iOS10/Syncfusion.Licensing.dll",
+        "lib/net40/Syncfusion.Licensing.dll",
+        "lib/net45/Syncfusion.Licensing.dll",
+        "lib/net451/Syncfusion.Licensing.dll",
+        "lib/net46/Syncfusion.Licensing.dll",
+        "lib/net6.0/Syncfusion.Licensing.dll",
+        "lib/net7.0/Syncfusion.Licensing.dll",
+        "lib/netstandard2.0/Syncfusion.Licensing.dll",
+        "lib/uap10.0/Syncfusion.Licensing.dll",
+        "syncfusion.licensing.22.2.12.nupkg.sha512",
+        "syncfusion.licensing.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.SfChart.WPF/22.2.12": {
+      "sha512": "73wd7GEx79eEczTG+LasubEqK6PVeA1xbvFxv0vnp4vZpv6TjBQ2m7OHl9hRtiM3EP8M7wVr3545pHs9frsonw==",
+      "type": "package",
+      "path": "syncfusion.sfchart.wpf/22.2.12",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net40/Design/Syncfusion.Design.Wpf.dll",
+        "lib/net40/Design/Syncfusion.SfChart.WPF.DesignTools.dll",
+        "lib/net40/Design/Syncfusion.SfChart.WPF.Expression.Design.dll",
+        "lib/net40/Design/Syncfusion.SfChart.WPF.VisualStudio.Design.dll",
+        "lib/net40/Syncfusion.SfChart.WPF.dll",
+        "lib/net40/Syncfusion.SfChart.WPF.xml",
+        "lib/net45/Design/Syncfusion.Design.Wpf.dll",
+        "lib/net45/Design/Syncfusion.SfChart.WPF.DesignTools.dll",
+        "lib/net45/Design/Syncfusion.SfChart.WPF.Expression.Design.dll",
+        "lib/net45/Design/Syncfusion.SfChart.WPF.VisualStudio.Design.dll",
+        "lib/net45/Syncfusion.SfChart.WPF.dll",
+        "lib/net45/Syncfusion.SfChart.WPF.xml",
+        "lib/net451/Design/Syncfusion.Design.Wpf.dll",
+        "lib/net451/Design/Syncfusion.SfChart.WPF.DesignTools.dll",
+        "lib/net451/Design/Syncfusion.SfChart.WPF.Expression.Design.dll",
+        "lib/net451/Design/Syncfusion.SfChart.WPF.VisualStudio.Design.dll",
+        "lib/net451/Syncfusion.SfChart.WPF.dll",
+        "lib/net451/Syncfusion.SfChart.WPF.xml",
+        "lib/net46/Design/Syncfusion.Design.Wpf.dll",
+        "lib/net46/Design/Syncfusion.SfChart.WPF.DesignTools.dll",
+        "lib/net46/Design/Syncfusion.SfChart.WPF.Expression.Design.dll",
+        "lib/net46/Design/Syncfusion.SfChart.WPF.VisualStudio.Design.dll",
+        "lib/net46/Syncfusion.SfChart.WPF.dll",
+        "lib/net46/Syncfusion.SfChart.WPF.xml",
+        "lib/net6.0-windows7.0/Design/Syncfusion.SfChart.WPF.DesignTools.dll",
+        "lib/net6.0-windows7.0/Syncfusion.SfChart.WPF.dll",
+        "lib/net6.0-windows7.0/Syncfusion.SfChart.WPF.xml",
+        "syncfusion.sfchart.wpf.22.2.12.nupkg.sha512",
+        "syncfusion.sfchart.wpf.nuspec",
+        "syncfusion_logo.png",
+        "tools/VisualStudioToolsManifest.xml"
+      ]
+    },
     "System.CodeDom/4.7.0": {
       "sha512": "Hs9pw/kmvH3lXaZ1LFKj3pLQsiGfj2xo3sxSzwiLlRL6UcMZUTeCfoJ9Udalvn3yq5dLlPEZzYegrTQ1/LhPOQ==",
       "type": "package",
@@ -3898,7 +3990,8 @@
       "FontAwesome.WPF >= 4.7.0.9",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.11",
-      "Prism.DryIoc >= 8.1.97"
+      "Prism.DryIoc >= 8.1.97",
+      "Syncfusion.SfChart.WPF >= 22.2.12"
     ]
   },
   "packageFolders": {
@@ -3908,9 +4001,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TimeKeeper.csproj",
-      "projectName": "TimeKeeper",
-      "projectPath": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TimeKeeper.csproj",
+      "projectUniqueName": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TaskKeeper.csproj",
+      "projectName": "TaskKeeper",
+      "projectPath": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\TaskKeeper.csproj",
       "packagesPath": "C:\\Users\\saman\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\saman\\OneDrive\\Desktop\\Bajra Trainee\\Course\\.NET\\TimeKeeperApp\\TimeKeeper\\obj\\",
       "projectStyle": "PackageReference",
@@ -3968,6 +4061,10 @@
           "Prism.DryIoc": {
             "target": "Package",
             "version": "[8.1.97, )"
+          },
+          "Syncfusion.SfChart.WPF": {
+            "target": "Package",
+            "version": "[22.2.12, )"
           }
         },
         "imports": [

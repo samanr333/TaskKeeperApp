@@ -1,27 +1,29 @@
 ﻿using Prism.Mvvm;
+using Prism.Commands;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
 using TimeKeeper.Models;
 using TimeKeeper.DataContext;
-using TimeKeeper.Command;
-using TimeKeeper.Views;
-using System;
 using TimeKeeper.Services;
 using Prism.Events;
-using Prism.Commands;
+using TimeKeeper.Command;
+using TimeKeeper.Views;
 
 namespace TimeKeeper.ViewModels
 {
     public class TaskViewModel : BindableBase, INotifyPropertyChanged
     {
         private DataServices _services;
-        public AppDbContext dbContext;
+        private AppDbContext dbContext;
         private TaskModel _task;
-        public DashboardViewModel dashboardViewModel;
+        private UserModel _user;
+        private ObservableCollection<TaskModel> _filteredTask;
+
         public TaskModel Task
         {
             get { return _task; }
@@ -31,7 +33,7 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(Task));
             }
         }
-        private UserModel _user;
+
         public UserModel User
         {
             get { return _user; }
@@ -45,43 +47,38 @@ namespace TimeKeeper.ViewModels
         public DelegateCommand RemoveCommand { get; set; }
         public ICommand ViewAddTaskModalCommand { get; set; }
         public ICommand ViewUpdateTaskModalCommand { get; set; }
-        private string _searchTask;
-        public string SearchTask
+
+        private string _searchKeyword;
+        public string SearchKeyword
         {
-            get { return _searchTask; }
+            get { return _searchKeyword; }
             set
             {
-                _searchTask = value;
-                OnPropertyChanged(nameof(SearchTask));
+                if (_searchKeyword != value)
+                {
+                    _searchKeyword = value;
+                    OnPropertyChanged(nameof(SearchKeyword));
+                    UpdateFilteredTasks();
+                }
             }
         }
 
-        private TaskModel _selectedTask;
-        public TaskModel SelectedTask
+        public ObservableCollection<TaskModel> FilteredTask
         {
-            get => _selectedTask;
-            set
-            {
-                SetProperty(ref _selectedTask, value);
-            }
-        }
-        private ObservableCollection<TaskModel> _taskList;
-        public ObservableCollection<TaskModel> TaskList {
             get
             {
-                return _taskList;
+                return _filteredTask;
             }
             set
             {
-                if (_taskList != value)
+                if (_filteredTask != value)
                 {
-                    _taskList = value;
-                    RaisePropertyChanged(nameof(TaskList));
+                    _filteredTask = value;
+                    OnPropertyChanged(nameof(FilteredTask));
                 }
-                
-                //SetProperty(ref _taskList, value);
-            } 
+            }
         }
+
         private IEventAggregator _aggregator;
 
         public TaskViewModel(DataServices services, IEventAggregator eventAggregator)
@@ -91,48 +88,41 @@ namespace TimeKeeper.ViewModels
             User = new UserModel();
             User = _services.GetSharedData();
             Task = new TaskModel();
-            dbContext = new AppDbContext();
             RemoveCommand = new DelegateCommand(Remove);
+            dbContext = new AppDbContext();
+            FilteredTask = new ObservableCollection<TaskModel>(dbContext.TaskTable.Where(t => t.UserId == User.UserId));
             ViewAddTaskModalCommand = new RelayCommand(ViewAddTaskModal, Can);
             ViewUpdateTaskModalCommand = new RelayCommand(ViewUpdateTaskkModal, Can);
-            UpdateTaskList();
+
+            // Subscribe to the event for adding/updating tasks
             _aggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddUpdateTable);
         }
 
         private void AddUpdateTable(TaskModel model)
         {
-            TaskList.Add(model);
+            FilteredTask.Add(model);
         }
-        public void UpdateTaskList()
-        {
-            GetTask();
-        }
-        private void GetTask()
-        {
-            if (String.IsNullOrWhiteSpace(SearchTask))
-            {
-                TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable.Where(t => t.UserId == User.UserId));
-            }
-            else
-            {
-                string text = SearchTask.Trim().ToLower();
-                TaskList = new ObservableCollection<TaskModel>(dbContext.TaskTable.
-                Where(t => t.UserId == User.UserId && t.TaskName.ToLower().Contains(text)));
-            }
-        }
-
 
         public void ViewAddTaskModal(object parameter)
         {
             AddTaskModal addTaskModal = new AddTaskModal();
             addTaskModal.Show();
         }
+
         public void ViewUpdateTaskkModal(object parameter)
         {
-            _services.SetSharedTaskData(SelectedTask);
-            UpdateTaskModal updateTaskModal = new UpdateTaskModal();
-            updateTaskModal.Show(); 
+            if (SelectedTask != null)
+            {
+                _services.SetSharedTaskData(SelectedTask);
+                UpdateTaskModal updateTaskModal = new UpdateTaskModal();
+                updateTaskModal.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a task");
+            }
         }
+
         public bool Can(object parameter)
         {
             return true;
@@ -149,7 +139,7 @@ namespace TimeKeeper.ViewModels
                 {
                     dbContext.TaskTable.Remove(SelectedTask);
                     dbContext.SaveChanges();
-                    TaskList.Remove(SelectedTask);
+                    FilteredTask.Remove(SelectedTask);
                     SelectedTask = null;
                 }
             }
@@ -157,7 +147,34 @@ namespace TimeKeeper.ViewModels
             {
                 MessageBox.Show("Please select a Task to remove");
             }
-        }        
+        }
+
+        // SelectedTask property
+        private TaskModel _selectedTask;
+        public TaskModel SelectedTask
+        {
+            get => _selectedTask;
+            set
+            {
+                SetProperty(ref _selectedTask, value);
+            }
+        }
+
+        // UpdateFilteredTasks method
+        private void UpdateFilteredTasks()
+        {
+            if (string.IsNullOrWhiteSpace(SearchKeyword))
+            {
+                FilteredTask = new ObservableCollection<TaskModel>(dbContext.TaskTable.Where(t => t.UserId == User.UserId));
+            }
+            else
+            {
+                string text = SearchKeyword.Trim().ToLower();
+                FilteredTask = new ObservableCollection<TaskModel>(FilteredTask
+                    .Where(t => t.UserId == User.UserId && t.TaskName.ToLower().Contains(text)));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -101,18 +101,18 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <!--<TextBox
+            <TextBox
                 Width="150"
                 Height="25"
                 Margin="30,0,0,0"
                 Background="AliceBlue"
                 BorderBrush="Transparent"
-                Text="{Binding SearchTask, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}" />
             <fa:FontAwesome
                 Margin="5"
                 FontSize="20"
                 Foreground="DarkRed"
-                Icon="Search" />-->
+                Icon="Search" />
 
         </WrapPanel>
 
@@ -124,7 +124,7 @@
             <!--  Set Orientation to Horizontal  -->
             <ListView
                 Background="Transparent"
-                ItemsSource="{Binding TaskList}"
+                ItemsSource="{Binding FilteredTask}"
                 SelectedItem="{Binding SelectedTask}"
                 SelectionMode="Single">
                 <ListView.ItemsPanel>
@@ -135,7 +135,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border
-                            Width="200"
+                            Width="300"
                             Height="auto"
                             Margin="10"
                             HorizontalAlignment="Stretch"
@@ -158,13 +158,13 @@
                                         VerticalAlignment="Center"
                                         Content="Title:"
                                         FontFamily="Montserrat"
-                                        FontSize="16"
+                                        FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="#BE263B" />
                                     <TextBlock
                                         Margin="5"
                                         FontFamily="Montserrat"
-                                        FontSize="16"
+                                        FontSize="20"
                                         FontWeight="Medium"
                                         Foreground="#BE263B"
                                         Text="{Binding TaskName}"
@@ -176,14 +176,14 @@
                                     <Label
                                         Content="Status: "
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen" />
                                     <TextBlock
                                         VerticalAlignment="Center"
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen"
@@ -193,14 +193,14 @@
                                     <Label
                                         Content="Created On: "
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen" />
                                     <TextBlock
                                         VerticalAlignment="Center"
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen"
@@ -211,14 +211,14 @@
                                     <Label
                                         Content="Updated On: "
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen" />
                                     <TextBlock
                                         VerticalAlignment="Center"
                                         FontFamily="Montserrat"
-                                        FontSize="10"
+                                        FontSize="12"
                                         FontStyle="Italic"
                                         FontWeight="Medium"
                                         Foreground="DarkGreen"
@@ -229,7 +229,7 @@
                                     Grid.Row="4"
                                     Margin="5"
                                     FontFamily="Montserrat"
-                                    FontSize="12"
+                                    FontSize="16"
                                     FontWeight="Medium"
                                     Text="{Binding Description}"
                                     TextWrapping="Wrap" />

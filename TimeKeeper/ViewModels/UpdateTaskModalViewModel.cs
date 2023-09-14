@@ -58,26 +58,45 @@ namespace TimeKeeper.ViewModels
             UpdatedTask = new TaskModel();
             UpdateCommand = new RelayCommand(Update, CanUpdate);
         }
+        /*public void Update(object parameter)
+        {
+            if (Task != null)
+            {
+                UpdatedTask.Status = Task.Status;
+                TaskModel tasks = new TaskModel {UserId = Task.UserId, TaskId = Task.TaskId ,TaskName = Task.TaskName, Description = Task.Description, Status = UpdatedTask.Status, TaskCreateDate = Task.TaskCreateDate, TaskUpdatedDate = DateTime.UtcNow};
+                dbContext.TaskTable.Update(tasks);
+                dbContext.SaveChanges();
+                _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(tasks);
+                Task = null;
+                MessageBox.Show("Task Updated Successfully");
+                Application.Current.Windows.OfType<UpdateTaskModal>().FirstOrDefault()?.Close();
+            }
+        }*/
         public void Update(object parameter)
         {
             if (Task != null)
             {
                 UpdatedTask.Status = Task.Status;
-                UpdatedTask.TaskUpdatedDate = DateTime.Now;
-                UpdatedTask.TaskUpdatedDate = DateTime.Now;
-                TaskModel tasks = new TaskModel {UserId = Task.UserId, TaskId = Task.TaskId ,TaskName = Task.TaskName, Description = Task.Description, Status = UpdatedTask.Status, TaskCreateDate = Task.TaskCreateDate, TaskUpdatedDate = UpdatedTask.TaskUpdatedDate};
-                dbContext.TaskTable.Update(tasks);
-                dbContext.SaveChanges();
-                _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(tasks);
+                TaskModel updatedTask = new TaskModel
+                {
+                    UserId = Task.UserId,
+                    TaskId = Task.TaskId,
+                    TaskName = Task.TaskName,
+                    Description = Task.Description,
+                    Status = UpdatedTask.Status,
+                    TaskCreateDate = Task.TaskCreateDate,
+                    TaskUpdatedDate = DateTime.Now // Set TaskUpdatedDate to the current date and time
+                };
 
+                dbContext.TaskTable.Update(updatedTask);
+                dbContext.SaveChanges();
+
+                _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(updatedTask);
                 MessageBox.Show("Task Updated Successfully");
                 Application.Current.Windows.OfType<UpdateTaskModal>().FirstOrDefault()?.Close();
             }
-            else
-            {
-                MessageBox.Show("Please select a task to update");
-            }
         }
+
         public bool CanUpdate(object parameter)
         {
             return true;

@@ -1,0 +1,20 @@
+﻿TaskKeeper
+
+
+winexe
+C#
+.cs
+C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\
+TaskKeeper
+none
+false
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\App.xaml
+8-981623358
+
+23157779593
+235240682549
+Views\AddTaskModal.xaml;Views\Dashboard.xaml;Views\Login.xaml;Views\MainWindow.xaml;Views\PrismWindow1.xaml;Views\Register.xaml;Views\Task.xaml;Views\UpdateTaskModal.xaml;
+
+False
+
