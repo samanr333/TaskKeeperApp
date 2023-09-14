@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -17,6 +18,7 @@ namespace TimeKeeper.ViewModels
 {
     public class UpdateTaskModalViewModel : BindableBase, INotifyPropertyChanged
 	{
+        private DataServices _dataServices;
         private IEventAggregator _eventAggregator;
         public AppDbContext dbContext;
         private DataServices _services;
@@ -42,7 +44,7 @@ namespace TimeKeeper.ViewModels
         }
         public ICommand UpdateCommand { get; set; }
         public List<string> StatusList { get; set; }
-        public UpdateTaskModalViewModel(DataServices services, EventAggregator eventAggregator)
+        public UpdateTaskModalViewModel(DataServices services, EventAggregator eventAggregator, DataServices dataServices)
         {
             StatusList = new List<string>
             {
@@ -56,7 +58,9 @@ namespace TimeKeeper.ViewModels
             Task = new TaskModel();
             Task = _services.GetSharedTaskData();
             UpdatedTask = new TaskModel();
+            UpdatedTask = Task;
             UpdateCommand = new RelayCommand(Update, CanUpdate);
+            _dataServices = dataServices;
         }
         /*public void Update(object parameter)
         {
@@ -76,7 +80,7 @@ namespace TimeKeeper.ViewModels
         {
             if (Task != null)
             {
-                UpdatedTask.Status = Task.Status;
+                /*UpdatedTask.Status = Task.Status;
                 TaskModel updatedTask = new TaskModel
                 {
                     UserId = Task.UserId,
@@ -85,13 +89,14 @@ namespace TimeKeeper.ViewModels
                     Description = Task.Description,
                     Status = UpdatedTask.Status,
                     TaskCreateDate = Task.TaskCreateDate,
-                    TaskUpdatedDate = DateTime.Now // Set TaskUpdatedDate to the current date and time
-                };
-
-                dbContext.TaskTable.Update(updatedTask);
+                    TaskUpdatedDate = DateTime.Now
+                };*/
+                UpdatedTask.Status = Task.Status;
+                UpdatedTask.TaskUpdatedDate = DateTime.Now;
+                dbContext.TaskTable.Update(UpdatedTask);
+                _dataServices.SetSharedUpdatedTaskData(UpdatedTask);
                 dbContext.SaveChanges();
-
-                _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(updatedTask);
+                Debug.WriteLine("Event Published");
                 MessageBox.Show("Task Updated Successfully");
                 Application.Current.Windows.OfType<UpdateTaskModal>().FirstOrDefault()?.Close();
             }

@@ -5,51 +5,7 @@
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <UserControl.Resources>
-        <Style x:Key="SearchBarStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="AliceBlue" />
-            <Setter Property="BorderBrush" Value="DarkRed" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Foreground" Value="DarkRed" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="Montserrat" />
-            <Setter Property="Padding" Value="30,0,0,0" />
-            <Setter Property="MinWidth" Value="150" />
-            <Setter Property="MinHeight" Value="25" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Grid>
-                            <Border
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="15">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock
-                                        Grid.Column="0"
-                                        Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        FontFamily="Montserrat"
-                                        FontSize="16"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Text="&#xf002;">
-                                        <!--  Use your FontAwesome icon for search here  -->
-                                        <!--  You may need to adjust the margin and icon based on your FontAwesome setup  -->
-                                    </TextBlock>
-                                    <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1" />
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
+
     <Grid>
         <WrapPanel Margin="50,10,0,0">
 

@@ -24,6 +24,16 @@ namespace TimeKeeper.ViewModels
             public string Name { get; set; }
             public int Value { get; set; }
         }
+        private TaskModel _task;
+        public TaskModel Task
+        {
+            get { return _task; }
+            set
+            {
+                _task = value;
+                OnPropertyChanged(nameof(Task));
+            }
+        }
 
         public int TotalTask
         {
@@ -74,18 +84,28 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(User));
             }
         }
+        
         private DataServices _services;
+        // For chart
         public ObservableCollection<PieChartData> Counts { get; set; }
+
         public DashboardViewModel(DataServices services, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             dbContext = new AppDbContext();
             User = new UserModel();
+            Task = new TaskModel();
             _services = services;
             _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddTaskCount);
-            _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTaskCount);
+            _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(DeleteTaskCount);
             User = _services.GetSharedData();
+            Task = _services.GetSharedUpdatedTaskData();
             Counts = new ObservableCollection<PieChartData>();
+            TaskCounts();
+        }
+
+        private void DeleteTaskCount(TaskModel model)
+        {
             TaskCounts();
         }
 
@@ -104,7 +124,6 @@ namespace TimeKeeper.ViewModels
             PendingTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Pending");
             InprogressTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "In Progress");
             DoneTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Done");
-
             Counts.Clear();
             Counts.Add(new PieChartData { Name = "Pending", Value = PendingTask });
             Counts.Add(new PieChartData { Name = "In Progress", Value = InprogressTask });

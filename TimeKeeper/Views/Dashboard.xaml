@@ -44,7 +44,7 @@
                             FontFamily="Montserrat"
                             FontSize="35"
                             FontWeight="Bold"
-                            Text="{Binding TotalTask}" />
+                            Text="{Binding TotalTask, Mode=TwoWay}" />
                     </Border>
                 </StackPanel>
             </Border>
@@ -72,7 +72,7 @@
                             FontFamily="Montserrat"
                             FontSize="35"
                             FontWeight="Bold"
-                            Text="{Binding PendingTask}" />
+                            Text="{Binding PendingTask, Mode=TwoWay}" />
                     </Border>
                 </StackPanel>
             </Border>
@@ -85,7 +85,7 @@
                         Icon="StarHalfFull" />
                     <Label
                         HorizontalAlignment="Center"
-                        Content="In Process"
+                        Content="In Progress"
                         FontFamily="Montserrat"
                         FontSize="35"
                         FontWeight="Bold" />
@@ -100,7 +100,7 @@
                             FontFamily="Montserrat"
                             FontSize="35"
                             FontWeight="Bold"
-                            Text="{Binding InprogressTask}" />
+                            Text="{Binding InprogressTask, Mode=TwoWay}" />
                     </Border>
                 </StackPanel>
             </Border>
@@ -128,15 +128,22 @@
                             FontFamily="Montserrat"
                             FontSize="35"
                             FontWeight="Bold"
-                            Text="{Binding DoneTask}" />
+                            Text="{Binding DoneTask, Mode=TwoWay}" />
                     </Border>
                 </StackPanel>
             </Border>
         </WrapPanel>
-        <Grid>
+        <Grid Width="500" Height="450">
             <chart:SfChart>
                 <chart:SfChart.Legend>
-                    <chart:ChartLegend Background="Transparent" />
+                    <chart:ChartLegend
+                        Margin="20"
+                        Background="Transparent"
+                        FontFamily="Montserrat"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        IconHeight="20"
+                        IconWidth="20" />
                 </chart:SfChart.Legend>
                 <chart:PieSeries
                     EnableSmartLabels="True"
@@ -144,7 +151,10 @@
                     XBindingPath="Name"
                     YBindingPath="Value">
                     <chart:PieSeries.AdornmentsInfo>
-                        <chart:ChartAdornmentInfo FontSize="25" ShowLabel="True" />
+                        <chart:ChartAdornmentInfo
+                            FontSize="20"
+                            Foreground="AliceBlue"
+                            ShowLabel="True" />
                     </chart:PieSeries.AdornmentsInfo>
                 </chart:PieSeries>
             </chart:SfChart>

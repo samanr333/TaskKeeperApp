@@ -60,14 +60,12 @@ C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeep
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\TaskKeeper.csproj.AssemblyReference.cache
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\AddTaskModal.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Dashboard.baml
-C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\PrismWindow1.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Task.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\UpdateTaskModal.baml
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\AddTaskModal.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Dashboard.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Login.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\MainWindow.g.cs
-C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\PrismWindow1.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Register.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\Task.g.cs
 C:\Users\saman\OneDrive\Desktop\Bajra Trainee\Course\.NET\TimeKeeperApp\TimeKeeper\obj\Debug\net6.0-windows\Views\UpdateTaskModal.g.cs

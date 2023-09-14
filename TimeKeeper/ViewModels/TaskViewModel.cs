@@ -141,6 +141,7 @@ namespace TimeKeeper.ViewModels
                     dbContext.SaveChanges();
                     FilteredTask.Remove(SelectedTask);
                     SelectedTask = null;
+                    _aggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(new TaskModel());
                 }
             }
             else

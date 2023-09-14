@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:passwords="clr-namespace:TimeKeeper.Services"
     xmlns:prism="http://prismlibrary.com/"
-    Width="550"
+    Width="450"
     Height="550"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="Transparent"

@@ -6,10 +6,9 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:views="clr-namespace:TimeKeeper.Views"
     Title="{Binding Title}"
-    MinWidth="900"
-    MinHeight="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized">
     <Window.Resources>
         <!--  Icon Image  -->
         <Style x:Key="TabIconStyle" TargetType="Image">
@@ -170,8 +169,7 @@
                         Background="Transparent"
                         BorderBrush="DarkRed"
                         BorderThickness="1"
-                        Command="{Binding LogoutCommand}"
-                        Cursor="Hand">
+                        Command="{Binding LogoutCommand}">
                         <Button.Content>
                             <fa:FontAwesome
                                 Margin="3"
@@ -210,8 +208,7 @@
                                 FontFamily="Montserrat"
                                 FontSize="15"
                                 FontWeight="Bold"
-                                Foreground="Black"
-                                Text="{Binding LoggedInHours}" />
+                                Foreground="Black" />
                         </WrapPanel>
                     </Border>
                     <Border

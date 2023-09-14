@@ -13,6 +13,8 @@ namespace TimeKeeper.Services
         {
             _sharedData = data;
         }
+
+
         private TaskModel _sharedTaskData;
         public TaskModel GetSharedTaskData()
         {
@@ -21,6 +23,16 @@ namespace TimeKeeper.Services
         public void SetSharedTaskData(TaskModel data)
         {
             _sharedTaskData = data;
+        }
+
+        private TaskModel _sharedUpdatedTaskData;
+        public TaskModel GetSharedUpdatedTaskData()
+        {
+            return _sharedUpdatedTaskData;
+        }
+        public void SetSharedUpdatedTaskData(TaskModel data)
+        {
+            _sharedUpdatedTaskData = data;
         }
     }
 }
