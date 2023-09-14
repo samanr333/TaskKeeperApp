@@ -6,8 +6,8 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:views="clr-namespace:TimeKeeper.Views"
     Title="{Binding Title}"
-    Width="900"
-    Height="500"
+    MinWidth="900"
+    MinHeight="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -205,13 +205,13 @@
                                 StrokeThickness="2" />
                             <TextBlock
                                 x:Name="ElapsedTimeText"
-                                Text="{Binding LoggedInHours}"
                                 Margin="5,0,0,0"
                                 VerticalAlignment="Center"
                                 FontFamily="Montserrat"
                                 FontSize="15"
                                 FontWeight="Bold"
-                                Foreground="Black" />
+                                Foreground="Black"
+                                Text="{Binding LoggedInHours}" />
                         </WrapPanel>
                     </Border>
                     <Border

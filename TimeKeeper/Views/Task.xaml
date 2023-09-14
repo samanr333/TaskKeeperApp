@@ -5,7 +5,51 @@
     xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:prism="http://prismlibrary.com/"
     prism:ViewModelLocator.AutoWireViewModel="True">
-
+    <UserControl.Resources>
+        <Style x:Key="SearchBarStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="AliceBlue" />
+            <Setter Property="BorderBrush" Value="DarkRed" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="DarkRed" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="Padding" Value="30,0,0,0" />
+            <Setter Property="MinWidth" Value="150" />
+            <Setter Property="MinHeight" Value="25" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontFamily="Montserrat"
+                                        FontSize="16"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Text="&#xf002;">
+                                        <!--  Use your FontAwesome icon for search here  -->
+                                        <!--  You may need to adjust the margin and icon based on your FontAwesome setup  -->
+                                    </TextBlock>
+                                    <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <WrapPanel Margin="50,10,0,0">
 
@@ -107,6 +151,7 @@
                 Margin="30,0,0,0"
                 Background="AliceBlue"
                 BorderBrush="Transparent"
+                Foreground="DarkRed"
                 Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}" />
             <fa:FontAwesome
                 Margin="5"
@@ -124,6 +169,7 @@
             <!--  Set Orientation to Horizontal  -->
             <ListView
                 Background="Transparent"
+                BorderThickness="0"
                 ItemsSource="{Binding FilteredTask}"
                 SelectedItem="{Binding SelectedTask}"
                 SelectionMode="Single">
@@ -135,7 +181,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border
-                            Width="300"
+                            Width="302"
                             Height="auto"
                             Margin="10"
                             HorizontalAlignment="Stretch"
@@ -147,12 +193,14 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <!--  Title  -->
                                 <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
+                                    <fa:FontAwesome
+                                        FontSize="30"
+                                        Foreground="AliceBlue"
+                                        Icon="Tasks" />
                                     <Label
                                         HorizontalAlignment="left"
                                         VerticalAlignment="Center"
@@ -172,61 +220,47 @@
                                 </WrapPanel>
 
                                 <!--  Status  -->
-                                <WrapPanel Grid.Row="1">
-                                    <Label
-                                        Content="Status: "
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen" />
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen"
-                                        Text="{Binding Status}" />
-                                </WrapPanel>
-                                <WrapPanel Grid.Row="2">
-                                    <Label
-                                        Content="Created On: "
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen" />
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen"
-                                        Text="{Binding TaskCreateDate}" />
-                                </WrapPanel>
-                                <!--  Updated Date  -->
-                                <WrapPanel Grid.Row="3">
-                                    <Label
-                                        Content="Updated On: "
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen" />
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontFamily="Montserrat"
-                                        FontSize="12"
-                                        FontStyle="Italic"
-                                        FontWeight="Medium"
-                                        Foreground="DarkGreen"
-                                        Text="{Binding TaskUpdatedDate}" />
-                                </WrapPanel>
+
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left">
+                                    <WrapPanel>
+                                        <Label
+                                            Content="Status: "
+                                            FontFamily="Montserrat"
+                                            FontSize="10"
+                                            FontWeight="Bold"
+                                            Foreground="DimGray" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontFamily="Montserrat"
+                                            FontSize="10"
+                                            FontWeight="Bold"
+                                            Foreground="DimGray"
+                                            Text="{Binding Status}" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <!--  Updated on  -->
+                                        <Label
+                                            Content="Updated On: "
+                                            FontFamily="Montserrat"
+                                            FontSize="10"
+                                            FontWeight="Bold"
+                                            Foreground="DimGray" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontFamily="Montserrat"
+                                            FontSize="10"
+                                            FontWeight="Bold"
+                                            Foreground="DimGray"
+                                            Text="{Binding TaskUpdatedDate}" />
+                                    </WrapPanel>
+                                </StackPanel>
+
                                 <!--  Description  -->
                                 <TextBlock
-                                    Grid.Row="4"
+                                    Grid.Row="2"
                                     Margin="5"
                                     FontFamily="Montserrat"
                                     FontSize="16"

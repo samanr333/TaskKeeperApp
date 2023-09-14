@@ -1,17 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using TimeKeeper.DataContext;
 using TimeKeeper.Models;
 using TimeKeeper.Services;
+using Syncfusion.UI.Xaml.Charts;
+using System.Linq;
 
 namespace TimeKeeper.ViewModels
 {
@@ -20,6 +19,12 @@ namespace TimeKeeper.ViewModels
         private IEventAggregator _eventAggregator;
         private readonly AppDbContext dbContext;
         private int _totalTask;
+        public class PieChartData
+        {
+            public string Name { get; set; }
+            public int Value { get; set; }
+        }
+
         public int TotalTask
         {
             get { return _totalTask; }
@@ -69,8 +74,8 @@ namespace TimeKeeper.ViewModels
                 OnPropertyChanged(nameof(User));
             }
         }
-        public ObservableCollection<int> Counts = new ObservableCollection<int>();
         private DataServices _services;
+        public ObservableCollection<PieChartData> Counts { get; set; }
         public DashboardViewModel(DataServices services, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -80,6 +85,7 @@ namespace TimeKeeper.ViewModels
             _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddTaskCount);
             _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTaskCount);
             User = _services.GetSharedData();
+            Counts = new ObservableCollection<PieChartData>();
             TaskCounts();
         }
 
@@ -94,12 +100,17 @@ namespace TimeKeeper.ViewModels
 
         public void TaskCounts()
         {
-            TotalTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId); ;
+            TotalTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId);
             PendingTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Pending");
             InprogressTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "In Progress");
             DoneTask = dbContext.TaskTable.Count(task => task.UserId == User.UserId && task.Status == "Done");
-            Counts = new ObservableCollection<int>() { PendingTask, InprogressTask, DoneTask };
+
+            Counts.Clear();
+            Counts.Add(new PieChartData { Name = "Pending", Value = PendingTask });
+            Counts.Add(new PieChartData { Name = "In Progress", Value = InprogressTask });
+            Counts.Add(new PieChartData { Name = "Done", Value = DoneTask });
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
