@@ -5,6 +5,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="img\splashscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
@@ -12,5 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="22.2.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="img\splashscreen.png" />
   </ItemGroup>
 </Project>

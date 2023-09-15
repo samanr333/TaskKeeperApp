@@ -76,6 +76,8 @@ namespace TimeKeeper {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.9.0")]
         public static void Main() {
+            SplashScreen splashScreen = new SplashScreen("img/splashscreen.png");
+            splashScreen.Show(true);
             TimeKeeper.App app = new TimeKeeper.App();
             app.InitializeComponent();
             app.Run();
