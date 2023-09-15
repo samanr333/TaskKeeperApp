@@ -98,8 +98,8 @@ namespace TimeKeeper.ViewModels
             _services = services;
             _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(AddTaskCount);
             _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(DeleteTaskCount);
+            _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Subscribe(UpdateTaskCount);
             User = _services.GetSharedData();
-            Task = _services.GetSharedUpdatedTaskData();
             Counts = new ObservableCollection<PieChartData>();
             TaskCounts();
         }

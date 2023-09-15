@@ -42,7 +42,7 @@
             <Button
                 Margin="30,0,0,0"
                 BorderThickness="0"
-                Command="{Binding RemoveCommand}"
+                Command="{Binding RemoveCommand, UpdateSourceTrigger=PropertyChanged}"
                 Content="Delete Task"
                 Cursor="Hand"
                 FontFamily="Montserrat"
@@ -126,7 +126,7 @@
             <ListView
                 Background="Transparent"
                 BorderThickness="0"
-                ItemsSource="{Binding FilteredTask}"
+                ItemsSource="{Binding FilteredTask, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedTask}"
                 SelectionMode="Single">
                 <ListView.ItemsPanel>

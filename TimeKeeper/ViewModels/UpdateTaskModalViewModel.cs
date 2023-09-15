@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TimeKeeper.Command;
@@ -18,7 +19,6 @@ namespace TimeKeeper.ViewModels
 {
     public class UpdateTaskModalViewModel : BindableBase, INotifyPropertyChanged
 	{
-        private DataServices _dataServices;
         private IEventAggregator _eventAggregator;
         public AppDbContext dbContext;
         private DataServices _services;
@@ -60,7 +60,6 @@ namespace TimeKeeper.ViewModels
             UpdatedTask = new TaskModel();
             UpdatedTask = Task;
             UpdateCommand = new RelayCommand(Update, CanUpdate);
-            _dataServices = dataServices;
         }
         /*public void Update(object parameter)
         {
@@ -94,10 +93,10 @@ namespace TimeKeeper.ViewModels
                 UpdatedTask.Status = Task.Status;
                 UpdatedTask.TaskUpdatedDate = DateTime.Now;
                 dbContext.TaskTable.Update(UpdatedTask);
-                _dataServices.SetSharedUpdatedTaskData(UpdatedTask);
                 dbContext.SaveChanges();
                 Debug.WriteLine("Event Published");
                 MessageBox.Show("Task Updated Successfully");
+                _eventAggregator.GetEvent<PubSubEvent<TaskModel>>().Publish(UpdatedTask);
                 Application.Current.Windows.OfType<UpdateTaskModal>().FirstOrDefault()?.Close();
             }
         }

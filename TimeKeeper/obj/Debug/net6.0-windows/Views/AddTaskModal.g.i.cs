@@ -75,7 +75,7 @@ namespace TimeKeeper.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TaskKeeper;V1.0.0.0;component/views/addtaskmodal.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TaskKeeper;component/views/addtaskmodal.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AddTaskModal.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
